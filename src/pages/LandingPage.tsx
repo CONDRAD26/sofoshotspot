@@ -315,6 +315,148 @@ export default function LandingPage() {
                     </Box>
                 </Stack>
             </Box>
+            {/* ================= HOW SOFOSHOTSPOT WORKS ================= */}
+            <Box sx={{ py: 14, px: 4, bgcolor: "#f4f6f8" }}>
+                <Box maxWidth="1400px" mx="auto">
+
+                    {/* Header */}
+                    <Typography
+                        variant="h4"
+                        fontWeight={800}
+                        textAlign="center"
+                        mb={2}
+                    >
+                        How SofosHotspot Works
+                    </Typography>
+
+                    <Typography
+                        textAlign="center"
+                        color="text.secondary"
+                        mb={10}
+                        maxWidth="820px"
+                        mx="auto"
+                        fontSize={18}
+                    >
+                        A seamless and intelligent workflow that connects users, networks,
+                        payments, and control systems — all automated in real time.
+                    </Typography>
+
+                    {/* Diagram */}
+                    <Box sx={{ position: "relative" }}>
+
+                        {/* Flow line (desktop only) */}
+                        <Box
+                            sx={{
+                                display: { xs: "none", md: "block" },
+                                position: "absolute",
+                                top: "50%",
+                                left: "5%",
+                                right: "5%",
+                                height: 2,
+                                bgcolor: "primary.main",
+                                opacity: 0.2,
+                                zIndex: 0,
+                            }}
+                        />
+
+                        <Stack
+                            direction={{ xs: "column", md: "row" }}
+                            spacing={5}
+                            alignItems="center"
+                            justifyContent="space-between"
+                            sx={{ position: "relative", zIndex: 1 }}
+                        >
+                            {[
+                                {
+                                    step: "01",
+                                    icon: <WifiIcon />,
+                                    title: "User Connects",
+                                    desc: "Client connects to Wi-Fi network"
+                                },
+                                {
+                                    step: "02",
+                                    icon: <SecurityIcon />,
+                                    title: "Captive Portal",
+                                    desc: "Login via voucher or credentials"
+                                },
+                                {
+                                    step: "03",
+                                    icon: <PaymentIcon />,
+                                    title: "Secure Payment",
+                                    desc: "MoMo, Airtel, PayPal, Stripe"
+                                },
+                                {
+                                    step: "04",
+                                    icon: <SpeedIcon />,
+                                    title: "Network Control",
+                                    desc: "MikroTik + RADIUS enforcement"
+                                },
+                                {
+                                    step: "05",
+                                    icon: <CheckIcon />,
+                                    title: "Internet Access",
+                                    desc: "Session activated instantly"
+                                }
+                            ].map((item, i) => (
+                                <Box
+                                    key={i}
+                                    sx={{
+                                        bgcolor: "#ffffff",
+                                        borderRadius: 4,
+                                        p: 4,
+                                        width: { xs: "100%", md: 240 },
+                                        textAlign: "center",
+                                        boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
+                                        transition: "0.4s",
+                                        "&:hover": {
+                                            transform: "translateY(-10px)",
+                                            boxShadow: "0 20px 40px rgba(0,0,0,0.12)",
+                                        }
+                                    }}
+                                >
+                                    {/* Step number */}
+                                    <Typography
+                                        fontWeight={700}
+                                        color="primary"
+                                        mb={1}
+                                        fontSize={14}
+                                    >
+                                        STEP {item.step}
+                                    </Typography>
+
+                                    {/* Icon */}
+                                    <Box
+                                        sx={{
+                                            mx: "auto",
+                                            mb: 2,
+                                            width: 64,
+                                            height: 64,
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "center",
+                                            borderRadius: "50%",
+                                            bgcolor: "primary.main",
+                                            color: "#fff",
+                                            fontSize: 30,
+                                        }}
+                                    >
+                                        {item.icon}
+                                    </Box>
+
+                                    {/* Text */}
+                                    <Typography variant="h6" fontWeight={700} mb={1}>
+                                        {item.title}
+                                    </Typography>
+
+                                    <Typography color="text.secondary" fontSize={14}>
+                                        {item.desc}
+                                    </Typography>
+                                </Box>
+                            ))}
+                        </Stack>
+                    </Box>
+                </Box>
+            </Box>
 
 
             {/* ================= PRICING ================= */}
