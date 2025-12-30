@@ -32,22 +32,12 @@ const heroImages = [
 
 export default function LandingPage() {
     const [index, setIndex] = useState(0);
-    const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
         const timer = setInterval(() => {
             setIndex((prev) => (prev + 1) % heroImages.length);
         }, 5000);
         return () => clearInterval(timer);
-    }, []);
-
-    // Scroll listener
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
-        };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
     const howItWorksSteps = [
@@ -63,43 +53,15 @@ export default function LandingPage() {
             <CssBaseline />
 
             {/* ================= NAVBAR ================= */}
-            <AppBar
-                position="fixed"
-                elevation={scrolled ? 4 : 0}
-                sx={{
-                    transition: "all 0.4s ease",
-                    bgcolor: scrolled ? "#0d47a1" : "transparent",
-                    color: "#fff",
-                }}
-            >
-                <Toolbar sx={{ justifyContent: "space-between", px: { xs: 2, md: 6 } }}>
-                    <Typography fontWeight={700} fontSize={{ xs: 18, md: 24 }}>
-                        SofosHotspot
-                    </Typography>
-                    <Stack
-                        direction={{ xs: "column", sm: "row" }}
-                        spacing={{ xs: 1, sm: 2 }}
-                        alignItems="center"
-                    >
-                        <Button color="inherit" sx={{ fontSize: { xs: 12, md: 16 } }}>Home</Button>
-                        <Button color="inherit" sx={{ fontSize: { xs: 12, md: 16 } }}>Documentation</Button>
-                        <Button color="inherit" sx={{ fontSize: { xs: 12, md: 16 } }}>Pricing</Button>
-                        <Button
-                            variant="contained"
-                            color="secondary"
-                            size="small"
-                            sx={{ fontSize: { xs: 12, md: 16 } }}
-                        >
-                            Login
-                        </Button>
-                        <Button
-                            variant="outlined"
-                            color="inherit"
-                            size="small"
-                            sx={{ fontSize: { xs: 12, md: 16 } }}
-                        >
-                            Sign Up
-                        </Button>
+            <AppBar position="fixed">
+                <Toolbar sx={{ justifyContent: "space-between" }}>
+                    <Typography fontWeight={700}>SofosHotspot</Typography>
+                    <Stack direction="row" spacing={2}>
+                        <Button color="inherit">Home</Button>
+                        <Button color="inherit">Documentation</Button>
+                        <Button color="inherit">Pricing</Button>
+                        <Button variant="contained" color="secondary">Login</Button>
+                        <Button variant="outlined" color="inherit">Sign Up</Button>
                     </Stack>
                 </Toolbar>
             </AppBar>
@@ -128,12 +90,7 @@ export default function LandingPage() {
                         Powering Intelligent Connectivity
                     </Typography>
                     <Typography variant="h6">Smart Wi-Fi • Secure Access • Automated Billing</Typography>
-                    <Stack
-                        direction={{ xs: "column", sm: "row" }}
-                        spacing={2}
-                        width={{ xs: "80%", sm: "auto" }}
-                        justifyContent="center"
-                    >
+                    <Stack direction="row" spacing={2}>
                         <Button size="large" variant="contained" color="secondary">Get Started</Button>
                         <Button size="large" variant="outlined" color="inherit">View Documentation</Button>
                     </Stack>
@@ -190,7 +147,7 @@ export default function LandingPage() {
                 </Stack>
             </Box>
 
-            {/* ================= HOW IT WORKS ================= */}
+            {/* ================= HOW IT WORKS (PROFESSIONAL TRANSPARENT CARDS) ================= */}
             <Box
                 sx={{
                     py: 14,
@@ -241,7 +198,7 @@ export default function LandingPage() {
                         content: '""',
                         position: "absolute",
                         inset: 0,
-                        bgcolor: "rgba(0,0,0,0.5)",
+                        bgcolor: "rgba(0,0,0,0.5)", // dark overlay
                         zIndex: 0,
                     },
                 }}
@@ -347,44 +304,211 @@ export default function LandingPage() {
                                 {
                                     icon: <PhoneIcon fontSize="large" color="primary" />,
                                     title: "Phone",
-                                    text: "+256 700 000 000",
+                                    text: "0783183425",
                                 },
-                            ].map((c, i) => (
-                                <Stack direction="row" spacing={2} key={i} alignItems="center">
-                                    {c.icon}
-                                    <Stack>
-                                        <Typography fontWeight={700}>{c.title}</Typography>
-                                        <Typography color="text.secondary">{c.text}</Typography>
-                                    </Stack>
-                                </Stack>
+                            ].map((item, i) => (
+                                <Box
+                                    key={i}
+                                    sx={{
+                                        bgcolor: "#fff",
+                                        p: 4,
+                                        borderRadius: 3,
+                                        boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        gap: 2,
+                                        transition: "0.3s",
+                                        "&:hover": {
+                                            transform: "translateY(-6px)",
+                                            boxShadow: "0 16px 30px rgba(0,0,0,0.12)",
+                                        },
+                                    }}
+                                >
+                                    <Box>{item.icon}</Box>
+                                    <Box>
+                                        <Typography fontWeight={700}>{item.title}</Typography>
+                                        <Typography color="text.secondary">{item.text}</Typography>
+                                    </Box>
+                                </Box>
                             ))}
-
-                            <Stack direction="row" spacing={2} mt={2}>
-                                <FacebookIcon />
-                                <TwitterIcon />
-                                <InstagramIcon />
-                                <LinkedInIcon />
-                            </Stack>
                         </Stack>
 
-                        {/* Right Column: Contact Form Placeholder */}
+                        {/* Right Column: Contact Form */}
                         <Box flex={1}>
                             <Box
                                 component="form"
                                 sx={{
                                     display: "flex",
                                     flexDirection: "column",
-                                    gap: 2,
+                                    gap: 3,
+                                    bgcolor: "#fff",
+                                    p: 4,
+                                    borderRadius: 3,
+                                    boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
+                                }}
+                                onSubmit={(e) => {
+                                    e.preventDefault();
+                                    alert("Message sent successfully!");
                                 }}
                             >
-                                <input placeholder="Name" style={{ padding: 12, borderRadius: 6, border: "1px solid #ccc" }} />
-                                <input placeholder="Email" style={{ padding: 12, borderRadius: 6, border: "1px solid #ccc" }} />
-                                <textarea placeholder="Message" rows={6} style={{ padding: 12, borderRadius: 6, border: "1px solid #ccc" }} />
-                                <Button variant="contained">Send Message</Button>
+                                <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
+                                    <input
+                                        type="text"
+                                        placeholder="Name"
+                                        required
+                                        style={{
+                                            flex: 1,
+                                            padding: "12px 16px",
+                                            borderRadius: 4,
+                                            border: "1px solid #ccc",
+                                            fontSize: 16,
+                                        }}
+                                    />
+                                    <input
+                                        type="email"
+                                        placeholder="Email"
+                                        required
+                                        style={{
+                                            flex: 1,
+                                            padding: "12px 16px",
+                                            borderRadius: 4,
+                                            border: "1px solid #ccc",
+                                            fontSize: 16,
+                                        }}
+                                    />
+                                </Stack>
+                                <input
+                                    type="text"
+                                    placeholder="Subject"
+                                    required
+                                    style={{
+                                        padding: "12px 16px",
+                                        borderRadius: 4,
+                                        border: "1px solid #ccc",
+                                        fontSize: 16,
+                                    }}
+                                />
+                                <textarea
+                                    placeholder="Message"
+                                    required
+                                    rows={5}
+                                    style={{
+                                        padding: "12px 16px",
+                                        borderRadius: 4,
+                                        border: "1px solid #ccc",
+                                        fontSize: 16,
+                                        resize: "none",
+                                    }}
+                                />
+                                <Button type="submit" variant="contained" size="large">
+                                    Send Message
+                                </Button>
                             </Box>
                         </Box>
                     </Stack>
                 </Box>
+            </Box>
+            {/* ================= NEWSLETTER SUBSCRIPTION ================= */}
+            <Box
+                sx={{
+                    py: 12,
+                    px: 4,
+                    bgcolor: "#1976d2",
+                    backgroundImage: "url('https://images.unsplash.com/photo-1509475826633-fed577a2c71b?auto=format&fit=crop&w=1400&q=80')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    position: "relative",
+                    color: "#fff",
+                    "&::before": {
+                        content: '""',
+                        position: "absolute",
+                        inset: 0,
+                        bgcolor: "rgba(25, 118, 210, 0.8)", // overlay for readability
+                        zIndex: 0,
+                    },
+                }}
+            >
+                <Box maxWidth="800px" mx="auto" textAlign="center" position="relative" zIndex={1}>
+                    <Typography variant="h4" fontWeight={700} mb={2}>
+                        Subscribe to Our Newsletter
+                    </Typography>
+                    <Typography mb={6} color="rgba(255,255,255,0.85)">
+                        Stay updated with the latest news, updates, and offers from SofosHotspot.
+                    </Typography>
+
+                    <Box
+                        component="form"
+                        sx={{
+                            display: "flex",
+                            flexDirection: { xs: "column", sm: "row" },
+                            gap: 2,
+                            justifyContent: "center",
+                        }}
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            alert("Thank you for subscribing!");
+                        }}
+                    >
+                        <input
+                            type="email"
+                            placeholder="Enter your email"
+                            required
+                            style={{
+                                flex: 1,
+                                padding: "12px 20px",
+                                borderRadius: "50px", // circular edges
+                                border: "none",
+                                fontSize: 16,
+                            }}
+                        />
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="secondary"
+                            sx={{
+                                px: 4,
+                                borderRadius: "50px", // rounded button
+                            }}
+                        >
+                            Subscribe
+                        </Button>
+                    </Box>
+                </Box>
+            </Box>
+
+            {/* ================= FOOTER ================= */}
+            <Box sx={{ bgcolor: "#0d47a1", color: "#fff", py: 6, textAlign: "center" }}>
+                <Typography mb={2}>
+                    © {new Date().getFullYear()} SofosHotspot — Powering Intelligent Connectivity
+                </Typography>
+
+                {/* Social Icons */}
+                <Stack direction="row" spacing={2} justifyContent="center" mb={2}>
+                    {[FacebookIcon, TwitterIcon, InstagramIcon, LinkedInIcon].map((Icon, i) => (
+                        <Box
+                            key={i}
+                            component="a"
+                            href="#"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            sx={{
+                                color: "#fff",
+                                fontSize: 28,
+                                transition: "0.3s",
+                                "&:hover": {
+                                    color: "#1976d2",
+                                    transform: "scale(1.2)",
+                                },
+                            }}
+                        >
+                            <Icon />
+                        </Box>
+                    ))}
+                </Stack>
+
+                <Typography variant="body2" color="rgba(255,255,255,0.7)">
+                    Contact us: gulu city, Muroni Road | Email: info@sofoshotspot.com | Tel: 0783183425
+                </Typography>
             </Box>
         </>
     );
